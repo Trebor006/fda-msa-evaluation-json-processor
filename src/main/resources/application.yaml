@@ -1,1 +1,10 @@
 
+server:
+  servlet:
+    context-path: /support/flujos-admision/v1/json-processor
+  port: 8081
+
+spring:
+  application:
+    name: fda-msa-evaluation-json-processor
+

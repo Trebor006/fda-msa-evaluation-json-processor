@@ -37,7 +37,7 @@ public class ProcessorServiceImpl implements ProcessorService {
 
     dataRepository.save(user);
 
-    return Optional.empty();
+    return Optional.of(PostResponseDto.builder().name(user.getName()).build());
   }
 
   private void saveToken(PostRequestDto requestDto) {

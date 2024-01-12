@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.repository.DataRepository;
+import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.repository.UserRepository;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.repository.TokenRepository;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.dto.PostRequestDto;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.dto.PostResponseDto;
@@ -26,7 +26,7 @@ class ProcessorServiceImplTest {
   @Mock private TokenMapper tokenMapper;
   @Mock private UserMapper userMapper;
 
-  @Mock private DataRepository dataRepository;
+  @Mock private UserRepository userRepository;
   @Mock private TokenRepository tokenRepository;
 
   @InjectMocks ProcessorServiceImpl processorService;
@@ -40,7 +40,7 @@ class ProcessorServiceImplTest {
     when(tokenRepository.findByToken(any())).thenReturn(MockUtils.TOKEN);
     when(userMapper.mapToUserEntity(any(), any())).thenReturn(MockUtils.USER);
 
-    Optional<PostResponseDto> result = processorService.saveDataStructure(requestDto);
+    Optional<PostResponseDto> result = processorService.saveUserInformation(requestDto);
 
     assertTrue(result.isPresent());
     assertNotNull(result.get());
@@ -50,7 +50,7 @@ class ProcessorServiceImplTest {
 
     verify(tokenRepository, times(1)).existsByToken(any());
     verify(tokenRepository, times(1)).findByToken(any());
-    verify(dataRepository, times(1)).save(any());
+    verify(userRepository, times(1)).save(any());
   }
 
   @Test
@@ -62,7 +62,7 @@ class ProcessorServiceImplTest {
     when(tokenRepository.findByToken(any())).thenReturn(MockUtils.TOKEN);
     when(userMapper.mapToUserEntity(any(), any())).thenReturn(MockUtils.USER);
 
-    Optional<PostResponseDto> result = processorService.saveDataStructure(requestDto);
+    Optional<PostResponseDto> result = processorService.saveUserInformation(requestDto);
 
     assertTrue(result.isPresent());
     assertNotNull(result.get());
@@ -72,6 +72,6 @@ class ProcessorServiceImplTest {
 
     verify(tokenRepository, times(1)).existsByToken(any());
     verify(tokenRepository, times(1)).findByToken(any());
-    verify(dataRepository, times(1)).save(any());
+    verify(userRepository, times(1)).save(any());
   }
 }

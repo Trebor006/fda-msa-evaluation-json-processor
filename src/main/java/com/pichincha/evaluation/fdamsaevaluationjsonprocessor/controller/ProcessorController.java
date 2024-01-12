@@ -20,7 +20,7 @@ public class ProcessorController {
   @PostMapping("save")
   public ResponseEntity<PostResponseDto> generateToken(@RequestBody PostRequestDto requestDto) {
     log.info("Token : " + requestDto.getToken());
-    Optional<PostResponseDto> response = processorService.saveDataStructure(requestDto);
+    Optional<PostResponseDto> response = processorService.saveUserInformation(requestDto);
 
     return response.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.noContent().build());
   }

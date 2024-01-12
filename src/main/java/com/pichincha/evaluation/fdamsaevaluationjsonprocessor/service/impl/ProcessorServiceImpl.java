@@ -1,8 +1,7 @@
 package com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.impl;
 
-import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.domain.Token;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.domain.User;
-import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.repository.DataRepository;
+import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.repository.UserRepository;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.repository.TokenRepository;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.ProcessorService;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.dto.PostRequestDto;
@@ -12,8 +11,10 @@ import java.util.Optional;
 
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProcessorServiceImpl implements ProcessorService {
@@ -21,21 +22,22 @@ public class ProcessorServiceImpl implements ProcessorService {
   private final TokenMapper tokenMapper;
   private final UserMapper userMapper;
 
-  private final DataRepository dataRepository;
+  private final UserRepository userRepository;
   private final TokenRepository tokenRepository;
 
   @Override
-  public Optional<PostResponseDto> saveDataStructure(PostRequestDto requestDto) {
+  public Optional<PostResponseDto> saveUserInformation(PostRequestDto requestDto) {
 
     if (!tokenRepository.existsByToken(requestDto.getToken())) {
+      log.info("saving new token in database");
       saveToken(requestDto);
     }
 
-    Token token = tokenRepository.findByToken(requestDto.getToken());
+    User user =
+        userMapper.mapToUserEntity(
+            tokenRepository.findByToken(requestDto.getToken()), requestDto.getUser());
 
-    User user = userMapper.mapToUserEntity(token, requestDto.getUser());
-
-    dataRepository.save(user);
+    userRepository.save(user);
 
     return Optional.of(PostResponseDto.builder().name(user.getName()).build());
   }

@@ -14,27 +14,27 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = PRIVATE)
 @Entity
-@Table(name = "EVA_USER")
+@Table(name = "EJP_USER")
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "Id")
+  @Column(name = "EJUS_ID")
   Long id;
 
   @ManyToOne
   @JoinColumn(
-      name = "IdToken",
+      name = "EJTO_ID",
       nullable = false,
-      foreignKey = @ForeignKey(name = "FK_user_token_id"))
+      foreignKey = @ForeignKey(name = "FK_EJP_USER_EJP_TOKEN_EJTO_ID"))
   Token token;
 
-  @Column(name = "name")
+  @Column(name = "NAME")
   String name;
 
-  @Column(name = "lastname")
+  @Column(name = "LASTNAME")
   String lastname;
 
-  @Column(name = "creationDate")
+  @Column(name = "CREATION_DATE")
   Date creationDate;
 }

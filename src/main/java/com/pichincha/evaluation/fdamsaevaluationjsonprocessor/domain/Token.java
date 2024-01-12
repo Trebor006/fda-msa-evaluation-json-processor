@@ -15,18 +15,18 @@ import java.util.Date;
 @Builder
 @FieldDefaults(level = PRIVATE)
 @Entity
-@Table(name = "EVA_TOKEN")
+@Table(name = "EJP_TOKEN")
 public class Token {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "Id")
+  @Column(name = "EJTO_ID")
   Long id;
 
-  @Column(name = "Token")
+  @Column(name = "TOKEN")
   String token;
 
-  @Column(name = "creationDate")
+  @Column(name = "CREATION_DATE")
   Date creationDate;
 
 }

@@ -5,5 +5,5 @@ import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.dto.PostRe
 import java.util.Optional;
 
 public interface ProcessorService {
-  Optional<PostResponseDto> saveDataStructure(PostRequestDto requestDto);
+  Optional<PostResponseDto> saveUserInformation(PostRequestDto requestDto);
 }

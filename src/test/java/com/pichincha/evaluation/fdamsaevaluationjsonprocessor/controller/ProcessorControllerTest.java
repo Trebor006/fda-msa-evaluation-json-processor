@@ -1,6 +1,5 @@
 package com.pichincha.evaluation.fdamsaevaluationjsonprocessor.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,7 +29,7 @@ class ProcessorControllerTest {
   @DisplayName("POST /processor/save - Success")
   void givenAValidDataShouldSaveSu() throws Exception {
 
-    when(processorService.saveDataStructure(MockUtils.POST_REQUEST_DTO))
+    when(processorService.saveUserInformation(MockUtils.POST_REQUEST_DTO))
         .thenReturn(Optional.of(MockUtils.POST_RESPONSE_DTO));
 
     mockMvc
@@ -41,6 +40,6 @@ class ProcessorControllerTest {
         .andExpect(status().isOk())
         .andReturn();
 
-    verify(processorService, times(1)).saveDataStructure(MockUtils.POST_REQUEST_DTO);
+    verify(processorService, times(1)).saveUserInformation(MockUtils.POST_REQUEST_DTO);
   }
 }

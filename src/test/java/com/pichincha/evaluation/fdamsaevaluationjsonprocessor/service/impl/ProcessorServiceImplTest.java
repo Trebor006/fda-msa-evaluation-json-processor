@@ -40,7 +40,7 @@ class ProcessorServiceImplTest {
     when(tokenRepository.findByToken(any())).thenReturn(MockUtils.TOKEN);
     when(userMapper.mapToUserEntity(any(), any())).thenReturn(MockUtils.USER);
 
-    Optional<PostResponseDto> result = processorService.saveDataStructure(requestDto);
+    Optional<PostResponseDto> result = processorService.saveUserInformation(requestDto);
 
     assertTrue(result.isPresent());
     assertNotNull(result.get());
@@ -62,7 +62,7 @@ class ProcessorServiceImplTest {
     when(tokenRepository.findByToken(any())).thenReturn(MockUtils.TOKEN);
     when(userMapper.mapToUserEntity(any(), any())).thenReturn(MockUtils.USER);
 
-    Optional<PostResponseDto> result = processorService.saveDataStructure(requestDto);
+    Optional<PostResponseDto> result = processorService.saveUserInformation(requestDto);
 
     assertTrue(result.isPresent());
     assertNotNull(result.get());

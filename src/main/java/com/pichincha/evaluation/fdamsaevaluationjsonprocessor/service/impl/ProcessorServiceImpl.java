@@ -26,7 +26,7 @@ public class ProcessorServiceImpl implements ProcessorService {
   private final TokenRepository tokenRepository;
 
   @Override
-  public Optional<PostResponseDto> saveDataStructure(PostRequestDto requestDto) {
+  public Optional<PostResponseDto> saveUserInformation(PostRequestDto requestDto) {
 
     if (!tokenRepository.existsByToken(requestDto.getToken())) {
       log.info("saving new token in database");

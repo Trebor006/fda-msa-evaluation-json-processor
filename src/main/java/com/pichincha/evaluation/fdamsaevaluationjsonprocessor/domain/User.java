@@ -3,6 +3,7 @@ package com.pichincha.evaluation.fdamsaevaluationjsonprocessor.domain;
 import static lombok.AccessLevel.PRIVATE;
 
 import jakarta.persistence.*;
+import java.util.Date;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -13,20 +14,27 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = PRIVATE)
 @Entity
-@Table(name = "EVA_DATA")
-public class Data {
+@Table(name = "EVA_USER")
+public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "Id")
   Long id;
 
-  @Column(name = "IdToken")
-  Long idToken;
+  @ManyToOne
+  @JoinColumn(
+      name = "IdToken",
+      nullable = false,
+      foreignKey = @ForeignKey(name = "FK_user_token_id"))
+  Token token;
 
-  @Column(name = "column1")
-  String column1;
+  @Column(name = "name")
+  String name;
 
-  @Column(name = "column2")
-  String column2;
+  @Column(name = "lastname")
+  String lastname;
+
+  @Column(name = "creationDate")
+  Date creationDate;
 }

@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Date;
+
 @Generated
 @Getter
 @RequiredArgsConstructor
@@ -23,4 +25,8 @@ public class Token {
 
   @Column(name = "Token")
   String token;
+
+  @Column(name = "creationDate")
+  Date creationDate;
+
 }

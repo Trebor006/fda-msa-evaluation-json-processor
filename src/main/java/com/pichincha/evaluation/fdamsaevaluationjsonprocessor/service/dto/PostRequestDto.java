@@ -15,5 +15,5 @@ import static lombok.AccessLevel.PRIVATE;
 @FieldDefaults(level = PRIVATE)
 public class PostRequestDto {
   String token;
-  PostJsonStructureRequestDto jsonStructure;
+  PostUserRequestDto user;
 }

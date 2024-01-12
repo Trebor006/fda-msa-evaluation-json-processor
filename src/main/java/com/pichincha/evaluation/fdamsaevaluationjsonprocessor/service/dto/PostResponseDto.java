@@ -14,5 +14,5 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = PRIVATE)
 public class PostResponseDto {
-    String response;
+    String name;
 }

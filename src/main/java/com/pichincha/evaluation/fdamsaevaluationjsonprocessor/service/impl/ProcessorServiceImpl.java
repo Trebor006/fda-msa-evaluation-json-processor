@@ -12,8 +12,10 @@ import java.util.Optional;
 
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProcessorServiceImpl implements ProcessorService {
@@ -28,12 +30,13 @@ public class ProcessorServiceImpl implements ProcessorService {
   public Optional<PostResponseDto> saveDataStructure(PostRequestDto requestDto) {
 
     if (!tokenRepository.existsByToken(requestDto.getToken())) {
+      log.info("saving new token in database");
       saveToken(requestDto);
     }
 
-    Token token = tokenRepository.findByToken(requestDto.getToken());
-
-    User user = userMapper.mapToUserEntity(token, requestDto.getUser());
+    User user =
+        userMapper.mapToUserEntity(
+            tokenRepository.findByToken(requestDto.getToken()), requestDto.getUser());
 
     dataRepository.save(user);
 

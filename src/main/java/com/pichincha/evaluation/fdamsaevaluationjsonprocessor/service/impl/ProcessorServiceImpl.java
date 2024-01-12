@@ -1,8 +1,7 @@
 package com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.impl;
 
-import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.domain.Token;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.domain.User;
-import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.repository.DataRepository;
+import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.repository.UserRepository;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.repository.TokenRepository;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.ProcessorService;
 import com.pichincha.evaluation.fdamsaevaluationjsonprocessor.service.dto.PostRequestDto;
@@ -23,7 +22,7 @@ public class ProcessorServiceImpl implements ProcessorService {
   private final TokenMapper tokenMapper;
   private final UserMapper userMapper;
 
-  private final DataRepository dataRepository;
+  private final UserRepository userRepository;
   private final TokenRepository tokenRepository;
 
   @Override
@@ -38,7 +37,7 @@ public class ProcessorServiceImpl implements ProcessorService {
         userMapper.mapToUserEntity(
             tokenRepository.findByToken(requestDto.getToken()), requestDto.getUser());
 
-    dataRepository.save(user);
+    userRepository.save(user);
 
     return Optional.of(PostResponseDto.builder().name(user.getName()).build());
   }

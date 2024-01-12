@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = PRIVATE)
-public class PostJsonStructureRequestDto {
-  String campo1;
-  String campo2;
+public class PostUserRequestDto {
+  String name;
+  String lastname;
 }
